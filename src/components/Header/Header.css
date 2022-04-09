@@ -15,3 +15,13 @@
 .header a:hover {
     color: orange;
 }
+.header button {
+    color: #ffffff;
+    background-color: #1c2b35;
+    font-size: 17px;
+    margin-left: 36px;
+    border: none;
+}
+.header button:hover {
+    color: orange;
+}
