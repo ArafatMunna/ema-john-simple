@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+    useCreateUserWithEmailAndPassword,
+    useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 
 const SignUp = () => {
     const [email, setEmail] = useState("");
@@ -12,6 +15,8 @@ const SignUp = () => {
 
     const [createUserWithEmailAndPassword, user, hooksError] =
         useCreateUserWithEmailAndPassword(auth);
+
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
 
     const handleEmailBlur = (event) => {
         setEmail(event.target.value);
@@ -41,6 +46,12 @@ const SignUp = () => {
         }
 
         createUserWithEmailAndPassword(email, password);
+    };
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle().then(() => {
+            navigate("/");
+        });
     };
 
     return (
@@ -93,6 +104,19 @@ const SignUp = () => {
                         Login
                     </Link>
                 </p>
+                <div className="horizontal-line-container">
+                    <div>
+                        <hr />
+                    </div>
+                    <p>Or</p>
+                    <div>
+                        <hr />
+                    </div>
+                </div>
+
+                <button onClick={handleGoogleSignIn} className="google-login">
+                    Continue with Google
+                </button>
             </div>
         </div>
     );

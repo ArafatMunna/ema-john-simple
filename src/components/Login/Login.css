@@ -52,3 +52,22 @@
 .form-container p {
     text-align: center;
 }
+.horizontal-line-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.horizontal-line-container hr{
+    width: 145px;
+}
+.horizontal-line-container p{
+    margin: 0 20px;
+}
+.google-login{
+    width: 415px;
+    height: 55px;
+    background-color: white;
+    margin: 20px 0;
+    font-size: 20px;
+    cursor: pointer;
+}

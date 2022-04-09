@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import "./Login.css";
@@ -11,6 +11,8 @@ const Login = () => {
 
     const [signInWithEmailAndPassword, user, loading, error] =
         useSignInWithEmailAndPassword(auth);
+
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
 
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -31,6 +33,12 @@ const Login = () => {
         event.preventDefault();
 
         signInWithEmailAndPassword(email, password);
+    };
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle().then(() => {
+            navigate(from, { replace: true });
+        });
     };
 
     return (
@@ -72,6 +80,19 @@ const Login = () => {
                         Create an account
                     </Link>
                 </p>
+                <div className="horizontal-line-container">
+                    <div>
+                        <hr />
+                    </div>
+                    <p>Or</p>
+                    <div>
+                        <hr />
+                    </div>
+                </div>
+
+                <button onClick={handleGoogleSignIn} className="google-login">
+                    Continue with Google
+                </button>
             </div>
         </div>
     );
