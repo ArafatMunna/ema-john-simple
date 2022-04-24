@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import {
@@ -30,9 +30,11 @@ const SignUp = () => {
         setConfirmPassword(event.target.value);
     };
 
-    if (user) {
-        navigate("/");
-    }
+    useEffect(() => {
+        if (user) {
+            navigate("/");
+        }
+    }, [user]);
 
     const handleCreateUser = (event) => {
         event.preventDefault();
@@ -65,7 +67,7 @@ const SignUp = () => {
                             onBlur={handleEmailBlur}
                             type="email"
                             name="email"
-                            id=""
+                            id="email"
                             required
                         />
                     </div>
@@ -75,7 +77,7 @@ const SignUp = () => {
                             onBlur={handlePasswordBlur}
                             type="password"
                             name="password"
-                            id=""
+                            id="password"
                             required
                         />
                     </div>
@@ -87,7 +89,7 @@ const SignUp = () => {
                             onBlur={handleConfirmPasswordBlur}
                             type="password"
                             name="confirm-password"
-                            id=""
+                            id="confirm-password"
                             required
                         />
                     </div>

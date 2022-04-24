@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     useSignInWithEmailAndPassword,
     useSignInWithGoogle,
@@ -28,9 +28,11 @@ const Login = () => {
         setPassword(event.target.value);
     };
 
-    if (user) {
-        navigate(from, { replace: true });
-    }
+    useEffect(() => {
+        if (user) {
+            navigate(from, { replace: true });
+        }
+    }, [user]);
 
     const handleUserSignIn = (event) => {
         event.preventDefault();
@@ -55,7 +57,7 @@ const Login = () => {
                             onBlur={handleEmailBlur}
                             type="email"
                             name="email"
-                            id=""
+                            id="email"
                             required
                         />
                     </div>
@@ -65,7 +67,7 @@ const Login = () => {
                             onBlur={handlePasswordBlur}
                             type="password"
                             name="password"
-                            id=""
+                            id="password"
                             required
                         />
                     </div>
